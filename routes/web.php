@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('products')->name('products.')->group(function ()
+{
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
+});
+
